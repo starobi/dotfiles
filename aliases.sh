@@ -1,5 +1,5 @@
 # ── dotfiles aliases ──────────────────────────────────────
-CHEAT_DIR="$HOME/dotfiles/cheatsheet_linux"
+CHEAT_DIR="$(dirname "$(realpath "${BASH_SOURCE[0]}")")/cheatsheet_linux"
 
 alias tools='cat ~/.tools.txt | fzf'
 
