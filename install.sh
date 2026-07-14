@@ -4,8 +4,12 @@ DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 have_cmd() { command -v "$1" >/dev/null 2>&1; }
 
+is_termux() {
+    [ -d "/data/data/com.termux/files/usr" ] || [[ "${PREFIX:-}" == *"com.termux"* ]]
+}
+
 # En containers se suele correr como root sin sudo; lo detectamos una sola vez
-if [ "$(id -u)" = "0" ]; then
+if [ "$(id -u)" = "0" ] || ! have_cmd sudo || is_termux; then
     SUDO=""
 else
     SUDO="sudo"
@@ -89,7 +93,9 @@ echo "→ Verificando Nerd Fonts..."
 FONT_DIR="$HOME/.local/share/fonts"
 FONT_NAME="JetBrainsMono"
 
-if ! have_cmd fc-list || ! have_cmd fc-cache; then
+if is_termux; then
+    echo "  (Termux detectado: configura Nerd Font con Termux:Styling o ~/.termux/font.ttf)"
+elif ! have_cmd fc-list || ! have_cmd fc-cache; then
     echo "  (fontconfig no está disponible, se omite verificación de fuentes)"
 elif fc-list | grep -qi "JetBrainsMono Nerd Font"; then
     echo "  (ya instalada, no se toca nada)"
