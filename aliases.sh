@@ -40,4 +40,7 @@ cheat() {
     echo "No existe: $CHEAT_DIR/$1.md"
   fi
 }
+if [[ "${PREFIX:-}" == *"com.termux"* ]]; then
+    source "$(dirname "$(realpath "${BASH_SOURCE[0]}")")/termux.sh"
+fi
 # ── fin dotfiles ──────────────────────────────────────────
