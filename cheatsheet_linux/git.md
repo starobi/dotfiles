@@ -31,8 +31,11 @@ git status                      # Working tree status
 git log --oneline --graph       # Compact visual log
 git log --oneline -10           # Last 10 commits
 git diff                        # Unstaged changes
+git diff -- <files>             # Changes in file
 git diff --staged               # Staged changes
-git diff <branch1>..<branch2>   # Diff between two branches
+git diff --name-only            # Only names of files change
+git diff <branch1>...<branch2>  # Diff between two branches 2 compared to 1 and compared to merge base
+git diff <brnach1>..<branch2>   # Comparision between the tip of the branches
 git show <hash>                 # Show a specific commit
 ```
 
@@ -125,6 +128,7 @@ git rebase <branch>             # Rebase current branch onto another
 git rebase -i HEAD~3            # Interactive rebase of last 3 commits
 git rebase --abort              # Abort a rebase
 git rebase --continue           # Continue after resolving conflicts
+git rebase --onto <new_branch_base> <commit_limit_not_considered> <branch_to_move> #Move a branch from a commit on top of another branch
 ```
 
 ---
