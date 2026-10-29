@@ -63,6 +63,7 @@ git reset HEAD~1                # Undo last commit, keep changes unstaged
 git reset --soft HEAD~1         # Undo last commit, keep changes staged
 git reset --hard HEAD~1         # Undo last commit, discard all changes ⚠️
 git revert <hash>               # Create a new commit that undoes a commit (safe for shared branches)
+git restore -source=<hash_of_commit_before_the_change> -- path_of_file #undo changes of a specific file
 ```
 
 ### Add a commit's changes to staged without committing
