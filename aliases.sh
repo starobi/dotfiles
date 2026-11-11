@@ -15,6 +15,20 @@ cheat() {
   local editor="${EDITOR:-nvim}"
   command -v "$editor" >/dev/null 2>&1 || editor="vi"
 
+  if [ "$1" = "add" ]; then
+    if [ -z "$2" ]; then
+      echo "Uso: cheat add <nombre>"
+      return 1
+    fi
+    local file="$CHEAT_DIR/$2.md"
+    if [ -f "$file" ]; then
+      echo "Ya existe: $file"
+    else
+      printf '# %s\n\n' "$2" > "$file"
+    fi
+    "$editor" "$file"
+    return
+  fi
   if [ -z "$1" ]; then
     local sel
     if command -v fzf >/dev/null 2>&1; then
